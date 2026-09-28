@@ -1,0 +1,170 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ivory: #f6f1e9;
+  --color-ivory-deep: #efe7db;
+  --color-sand: #e6d9c6;
+  --color-champagne: #d8c3a0;
+  --color-espresso: #2b1d16;
+  --color-espresso-soft: #3b2a21;
+  --color-cocoa: #6f5a4c;
+  --color-burgundy: #6b1e2a;
+  --color-burgundy-deep: #551722;
+  --color-rose: #b87a7e;
+  --color-rose-soft: #e7cfc9;
+  --color-olive: #6e7456;
+  --color-line: #ddd0bd;
+  --color-ink: #2b1d16;
+  --color-muted: #75655a;
+
+  --font-serif: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  --font-script: 'Mrs Saint Delafield', 'Snell Roundhand', cursive;
+
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --animate-fade-up: fade-up 0.7s var(--ease-soft) both;
+  --animate-fade-in: fade-in 0.5s var(--ease-soft) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-ivory font-sans text-ink antialiased;
+    font-weight: 400;
+    overflow-x: clip;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+  ::selection {
+    @apply bg-burgundy text-ivory;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-burgundy);
+    outline-offset: 3px;
+  }
+  .on-dark :focus-visible,
+  .on-dark:focus-visible {
+    outline-color: var(--color-champagne);
+  }
+  img {
+    color: transparent;
+  }
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-[1320px] px-4 sm:px-6 lg:px-10;
+}
+@utility eyebrow {
+  @apply font-sans text-[0.7rem] font-medium tracking-[0.24em] uppercase;
+}
+@utility btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 border px-6 text-[0.78rem] font-medium tracking-[0.14em] uppercase transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn border-burgundy bg-burgundy text-ivory hover:border-burgundy-deep hover:bg-burgundy-deep;
+}
+@utility btn-outline {
+  @apply btn border-ink/70 bg-transparent text-ink hover:bg-ink hover:text-ivory;
+}
+@utility btn-light {
+  @apply btn border-ivory/70 bg-transparent text-ivory hover:bg-ivory hover:text-espresso;
+}
+@utility link-underline {
+  @apply inline-flex items-center gap-2 border-b border-current pb-0.5 text-[0.75rem] font-medium tracking-[0.16em] uppercase transition-opacity hover:opacity-70;
+}
+@utility field-label {
+  @apply mb-1.5 block text-[0.72rem] font-medium tracking-[0.14em] text-cocoa uppercase;
+}
+@utility field {
+  @apply block min-h-11 w-full border border-line bg-white/60 px-3.5 py-2.5 text-[0.95rem] text-ink placeholder:text-muted/70 transition-colors focus:border-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-burgundy aria-invalid:border-burgundy;
+}
+@utility field-error {
+  @apply mt-1.5 text-[0.8rem] text-burgundy;
+}
+
+@layer components {
+  .prose-editorial p {
+    @apply mb-5 text-[1.05rem] leading-[1.8] text-ink/85;
+  }
+  .prose-editorial h2 {
+    @apply mt-12 mb-4 text-3xl;
+  }
+  .prose-editorial ul {
+    @apply mb-6 list-disc space-y-2 pl-5 text-[1.02rem] leading-relaxed text-ink/85 marker:text-rose;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes drawer-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes drawer-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes hero-progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  body[data-sticky-bar] #root > div {
+    padding-bottom: calc(8.5rem + env(safe-area-inset-bottom));
+  }
+}
